@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>NetWatch Lite Dashboard</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- FONTS -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Poppins:wght@500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --bg2: #0f172a;
+            --card: rgba(255, 255, 255, 0.05);
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+
+            --accent: #00f0ff;
+            --accent2: #7c3aed;
+
+            --text: #e5e7eb;
+            --muted: #94a3b8;
+
+            --success: #22c55e;
+            --danger: #ef4444;
+        }
+
+        /* GLOBAL */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: linear-gradient(-45deg, #0a0a0f, #0f172a, #020617, #0a0a0f);
+            background-size: 400% 400%;
+            animation: gradient 12s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0%
+            }
+
+            50% {
+                background-position: 100%
+            }
+
+            100% {
+                background-position: 0%
+            }
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* NAV */
+        .nav {
+            padding: 1rem 2rem;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav h3 {
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        .nav a {
+            color: var(--text);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .nav a:hover {
+            color: var(--accent);
+        }
+
+        /* LAYOUT */
+        .container {
+            padding: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--accent);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+        }
+
+        .card.online {
+            box-shadow: inset 3px 0 0 var(--success);
+        }
+
+        .card.offline {
+            box-shadow: inset 3px 0 0 var(--danger);
+        }
+
+        /* BADGE */
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .bg-online {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--success);
+        }
+
+        .bg-offline {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+        }
+
+        /* SECTIONS */
+        .section {
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+
+        /* FORM */
+        input {
+            padding: 0.6rem;
+            background: #020617;
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        /* BUTTON */
+        button,
+        .btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #000;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover,
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px var(--accent);
+        }
+
+        p,
+        small {
+            color: var(--muted);
+        }
+
+        /* FOOTER */
+        .footer {
+            margin-top: 3rem;
+            padding: 1.5rem 2rem;
+            text-align: center;
+
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border);
+
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .footer span {
+            color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="nav">
+        <h3>⚡ NetWatch Lite</h3>
+        <a href="login.html">Logout</a>
+    </div>
+
+    <div class="container">
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <h2>System Status</h2>
+            <a href="../backend/export_csv.php" class="btn">📥 Export CSV</a>
+        </div>
+
+        <!-- Chart -->
+        <div class="section">
+            <h4>📈 Response Time History</h4>
+            <canvas id="responseChart" height="80"></canvas>
+        </div>
+
+        <!-- Add Server -->
+        <div class="section">
+            <h4>➕ Add New Server</h4>
+            <form id="addServerForm" style="display:flex; gap:1rem; flex-wrap:wrap;">
+                <input type="text" id="serverName" placeholder="Server name" required>
+                <input type="text" id="ipAddress" placeholder="IP or domain" required>
+                <button type="submit">Add Server</button>
+            </form>
+            <div id="addMsg" style="margin-top:1rem;"></div>
+        </div>
+
+        <!-- Servers -->
+        <div id="server-grid" class="grid">
+            <p>Loading status...</p>
+        </div>
+
+    </div>
+
+    <!-- ADD SERVER -->
+    <script>
+        document.getElementById('addServerForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const msg = document.getElementById('addMsg');
+            msg.innerText = 'Adding...';
+
+            const formData = new FormData();
+            formData.append('server_name', document.getElementById('serverName').value);
+            formData.append('ip_address', document.getElementById('ipAddress').value);
+
+            try {
+                const res = await fetch('../backend/add_server.php', { method: 'POST', body: formData });
+                const result = await res.json();
+                msg.innerText = result.message;
+                msg.style.color = result.success ? '#22c55e' : '#ef4444';
+
+                if (result.success) {
+                    location.reload();
+                }
+            } catch {
+                msg.innerText = 'Connection error';
+                msg.style.color = '#ef4444';
+            }
+        });
+    </script>
+
+    <!-- DASHBOARD -->
+    <script>
+        async function loadDashboard() {
+            try {
+                const response = await fetch('../backend/api_get_status.php');
+                const servers = await response.json();
+                const grid = document.getElementById('server-grid');
+                grid.innerHTML = '';
+
+                servers.forEach(server => {
+                    const statusClass = server.status === 'online' ? 'online' : 'offline';
+                    const badgeClass = server.status === 'online' ? 'bg-online' : 'bg-offline';
+
+                    grid.innerHTML += `
+                <div class="card ${statusClass}">
+                    <h4>${server.server_name}</h4>
+                    <p>${server.ip_address}</p>
+                    <div style="display:flex; justify-content:space-between;">
+                        <span class="status-badge ${badgeClass}">${server.status}</span>
+                        <span>${server.response_time} ms</span>
+                    </div>
+                    <small>Last check: ${server.timestamp}</small>
+                </div>
+            `;
+                });
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        loadDashboard();
+        setInterval(loadDashboard, 10000);
+    </script>
+
+    <!-- CHART -->
+    <script>
+        let responseChart;
+
+        async function loadChartData() {
+            const res = await fetch('../backend/api_get_chart_data.php');
+            const data = await res.json();
+
+            const ctx = document.getElementById('responseChart');
+
+            if (responseChart) responseChart.destroy();
+
+            responseChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Response Time',
+                        data: data.response_times,
+                        borderColor: '#00f0ff',
+                        backgroundColor: 'rgba(0,240,255,0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                }
+            });
+        }
+
+        loadChartData();
+        setInterval(loadChartData, 30000);
+    </script>
+    <div class="footer">
+        © 2026 <span>Neo Leseme</span>. All rights reserved.
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+# Python virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# Database config (if you add one later)
+database/config.php
+*.env
+
+# Log files
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# XAMPP specific (if any)
+htdocs/netwatch-lite/*.tmp
