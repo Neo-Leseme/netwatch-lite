@@ -436,29 +436,27 @@ Check Browser Network Tab
 
  10. Screenshot
 Figure 1: Login Page
-<img width="1366" height="739" alt="image" src="https://github.com/user-attachments/assets/08823850-646e-47d0-8384-c0fcfd2961ef" />
+<img width="1366" height="739" alt="Screenshot from 2026-03-20 23-04-45" src="https://github.com/user-attachments/assets/c99bba79-5ab7-4e53-8b5c-04e71793b7ab" />
+
 
 
 Figure 2: Dashboard Overview
-<img width="1366" height="739" alt="Screenshot from 2026-03-20 21-56-22" src="https://github.com/user-attachments/assets/9e0d96f9-fe4f-4b18-b59c-0116e09f5272" />
+<img width="1366" height="739" alt="Screenshot from 2026-03-20 21-56-22" src="https://github.com/user-attachments/assets/e46ed7b6-5c90-41fc-9483-90e75e0a9934" />
+
 
 
 Figure 3: Add Server Form
-<img width="1366" height="739" alt="image" src="https://github.com/user-attachments/assets/dc0ec729-e439-4628-a34b-fb4e32b1b33b" />
+<img width="1366" height="739" alt="Screenshot from 2026-03-20 23-06-12" src="https://github.com/user-attachments/assets/8305d8c5-0a5f-405e-abc2-c9483207bf43" />
+
 
 
 Figure 4: CSV Export Example
 
-<img width="1366" height="739" alt="Screenshot from 2026-03-20 22-20-10" src="https://github.com/user-attachments/assets/ce3db52b-db34-4240-820b-adaf9c936e0f" />
-<img width="1366" height="739" alt="Screenshot from 2026-03-20 22-27-26" src="https://github.com/user-attachments/assets/51c532d7-aebf-45de-8e6b-b5b22965f5b5" />
-
+<img width="1366" height="739" alt="Screenshot from 2026-03-20 22-20-10" src="https://github.com/user-attachments/assets/303d3e96-8875-4e11-a83f-e2b3150629b6" />
+<img width="1366" height="739" alt="Screenshot from 2026-03-20 22-27-26" src="https://github.com/user-attachments/assets/7eccd091-aa4b-4804-aa85-5a467b36acdd" />
 
 Figure 5: Response Time Chart Detail
-<img width="1366" height="739" alt="Screenshot from 2026-03-20 22-21-32" src="https://github.com/user-attachments/assets/dd76a1d2-bb57-41a9-ac11-9f69487966c3" />
-
-
-
-
+<img width="1366" height="739" alt="Screenshot from 2026-03-20 22-21-32" src="https://github.com/user-attachments/assets/a4728bf2-1d00-4884-92a2-d703e10e52f5" />
 
  11. License
 
