@@ -232,8 +232,7 @@ netwatch-lite/
 +-- docs/                      Documentation Assets
 |   +-- architecture.md       Detailed architecture notes
 |   +-- [screenshots]         Images for documentation
-|
-+-- venv/                      Python Virtual Environment (GitIgnored)
+|                     Python Virtual Environment (GitIgnored)
 +-- README.md                  This documentation
 +-- .gitignore                 Git ignore rules
 ```
